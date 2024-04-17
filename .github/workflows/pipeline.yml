@@ -30,7 +30,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: yourdockerhubusername/deel:v1.0
+        tags: abiola89/deel:v1.0
 
   deploy:
     needs: build-and-push
@@ -49,15 +49,12 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Add Helm repo (if needed)
-      run: helm repo add your_repo_name https://yourhelmchartrepo.com/
-
     - name: Helm upgrade and install
       run: |
         helm upgrade --install deel-release ./deel-chart \
           --namespace default \
           --create-namespace \
-          --set image.repository=yourdockerhubusername/deel \
+          --set image.repository=abiola89/deel \
           --set image.tag=v1.0
 
     - name: Verify deployment
