@@ -8,6 +8,29 @@ This documentation covers the deployment of a Flask application using Docker, Te
 2. Terraform Setup
 3. Kubernetes and Helm Deployment
 
+
+## Application and Database App.py
+
+Application Setup
+The application uses Flask to create a simple web server with a route that reverses client IP addresses and stores them in a SQLite database.
+
+Database Initialization
+A SQLite database ips.db is initialized with a table reversed_ips to store the IP addresses:
+
+- id: Auto-incremented primary key.
+- ip: Reversed IP address.
+
+Flask Route
+The application defines one route (/) that:
+
+1. Retrieves the client's IP address.
+2. Reverses the IP address.
+3. Stores the reversed IP in the database.
+4. Returns the reversed IP to the client.
+
+Running the Application
+The Flask application is set to run on host='0.0.0.0' and port=5000, allowing it to be accessible over the network.
+
 ## Docker Deployment
 
 ### Building the Docker Image
@@ -59,8 +82,11 @@ To use this Terraform configuration, follow these steps:
 Make sure you have the necessary permissions and credentials to create resources in your Azure subscription.
 
 
+
 ## Helm Deployment
 ### Generating Helm Charts
+Helm charts are currently in deel directory
+
 To deploy the Flask application to Kubernetes using Helm, follow these steps:
 1. Create a new directory for the Helm charts: `mkdir deel`.
 2. Change into the newly created directory: `cd deel`.
