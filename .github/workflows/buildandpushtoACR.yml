@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - 'master'
+
+env:
+  AZURE_CONTAINER_REGISTRY: "ACRdeel"
+  CONTAINER_NAME: "deel"
+  RESOURCE_GROUP: "rg-honest-hog"
+  CLUSTER_NAME: "cluster-mutual-yeti"
+
 jobs:
   build:
     permissions:
@@ -25,16 +32,8 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Docker Login
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.AZURE_URL }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Build and Push to ACR
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: abiola89/deel:v1.0
-          file: ./Dockerfile
+      # Builds and pushes an image up to your Azure Container Registry
+      - name: Build and push image to ACR
+        run: |
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
+         
