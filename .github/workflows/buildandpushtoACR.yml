@@ -6,12 +6,13 @@ on:
       - 'master'
 jobs:
   build:
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+        
     name: 'Build and Push to ACR'
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: Checkout
@@ -29,4 +30,4 @@ jobs:
         with:
           push: true
           tags: abiola89/deel:v1.0
-          file: Dockerfile
+          file: ./Dockerfile
