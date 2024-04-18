@@ -28,5 +28,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.IMAGE_TAG }}
+          tags: abiola89/deel:v1.0
           file: Dockerfile
