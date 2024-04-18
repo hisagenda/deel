@@ -6,8 +6,7 @@ on:
       - 'master'
 
 env:
-  AZURE_CONTAINER_REGISTRY: "ACRdeel"
-  CONTAINER_NAME: "abiola89/deel"
+  AZURE_CONTAINER_REGISTRY: "acrdeel"
   RESOURCE_GROUP: "rg-honest-hog"
   CLUSTER_NAME: "cluster-mutual-yeti"
 
@@ -35,5 +34,4 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:{{.Run.ID}} -r ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
-
+          az acr build --image acrdeel.azurecr.io/abiola89/deel:{{.Run.ID}} -r acrdeel -g rg-honest-hog .
